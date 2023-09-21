@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/restaurantProject
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+server:
+  port: 6060
+  error:
+    include-message: always
+
+
+app:
+  jwt:
+    secret: java10
