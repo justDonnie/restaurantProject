@@ -1,6 +1,4 @@
 package peaksoft.api;
-
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;

@@ -3,8 +3,6 @@ package peaksoft.service.impl;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import peaksoft.dto.AuthenticationResponse;
@@ -79,8 +77,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             user.setLastName(request.lastName());
             user.setDateOfBirth(request.dateOfBirth());
             user.setEmail(request.email());
-            user.setPassword(request.password());
-            user.setPhoneNumber(passwordEncoder.encode(request.password()));
+            user.setPassword(passwordEncoder.encode(request.password()));
+            user.setPhoneNumber(request.phoneNumber());
             user.setRole(request.role());
             user.setExperience(request.experience());
             userRepository.save(user);
@@ -126,7 +124,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setPassword(passwordEncoder.encode("admin1"));
         user.setPhoneNumber("+996777777777");
         user.setRole(Role.ADMIN);
-        user.setExperience(7);
         if (!userRepository.existsByEmail("admin@gmail.com")) {
             Restaurant restaurant = new Restaurant();
             restaurant.setName("Florance");

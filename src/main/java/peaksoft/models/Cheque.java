@@ -3,6 +3,7 @@ package peaksoft.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class Cheque {
             allocationSize = 1
     )
     private Long id;
-    private int priceAverage;
+    private BigDecimal priceAverage;
     private ZonedDateTime createdAt;
 
     @ManyToOne(cascade = {CascadeType.PERSIST,MERGE,REFRESH,DETACH})

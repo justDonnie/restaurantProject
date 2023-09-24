@@ -5,16 +5,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import peaksoft.dto.RestaurantRequest;
-import peaksoft.dto.RestaurantResponse;
-import peaksoft.dto.SimpleResponse;
+import peaksoft.dto.*;
+import peaksoft.exceptions.AlreadyExistException;
 import peaksoft.exceptions.BadCredentialException;
+import peaksoft.exceptions.BadRequestException;
 import peaksoft.exceptions.NotFoundException;
 import peaksoft.models.Restaurant;
 import peaksoft.models.User;
 import peaksoft.repository.RestaurantRepository;
 import peaksoft.repository.UserRepository;
 import peaksoft.repository.template.RestJdbcTemplate;
+import peaksoft.security.jwt.JwtService;
 import peaksoft.service.RestaurantService;
 
 import java.util.List;
@@ -26,10 +27,43 @@ import java.util.Optional;
 @Slf4j
 
 public class RestaurantServiceImpl implements RestaurantService {
+
     private final RestaurantRepository restaurantRepository;
     private final RestJdbcTemplate restJdbcTemplate;
+    private final JwtService jwtService;
     private final UserRepository userRepository;
 
+
+    @Override
+    public AuthenticationResponse saveEmployee(UserRequest userRequest) {
+        Restaurant restaurant1 = null;
+        for (Restaurant restaurant: restaurantRepository.findAll()) {
+            restaurant1=restaurant;
+        }
+        User user = userRequest.userBuild();
+        if (restaurant1!=null){
+            if (restaurant1.getNumberOfEmployees()<=15){
+                user.setRestaurant(restaurant1);
+                restaurant1.assign(user);
+                restaurant1.setNumberOfEmployees(restaurant1.getNumberOfEmployees()+1);
+                userRepository.save(user);
+                restaurantRepository.save(restaurant1);
+                String token = jwtService.generateToken(user);
+                log.info("Employee is successfully saved !!!");
+                return AuthenticationResponse.builder()
+                        .email(user.getEmail())
+                        .role(user.getRole())
+                        .token(token)
+                        .build();
+            }
+            else {
+                throw new AlreadyExistException(" There are no any vacancies in this restaurant !!!");
+            }
+        }
+        else {
+            throw new BadRequestException("There are no any restaurants !!!");
+        }
+    }
 
     @Override
     public Optional<RestaurantResponse> getRestaurantById(Long restaurantId) {
@@ -38,6 +72,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public List<RestaurantResponse>getAllRestaurant() {
+        log.info("All list of restaurants");
         return restJdbcTemplate.getAllRestaurants();
     }
 
@@ -50,6 +85,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                     return new NotFoundException(massage);
                 });
         restaurantRepository.delete(restaurant);
+        log.error("Restaurant is successfully deleted !!!");
         return new SimpleResponse(
                 HttpStatus.OK,
                 "Restaurant is successfully deleted !!!"

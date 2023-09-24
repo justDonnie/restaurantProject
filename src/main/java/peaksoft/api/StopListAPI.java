@@ -23,35 +23,34 @@ public class StopListAPI {
 
     @PreAuthorize("hasAnyAuthority('ADMIN','CHEF')")
     @GetMapping("/getAll")
-    List<StopListResponse> getAllLists(){
+    List<StopListResponse> getAllLists() {
         return stopListService.allStopLists();
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN','CHEF')")
     @PostMapping("/create/{menuId}")
     SimpleResponse createStopList(@PathVariable Long menuId,
-                                  @RequestBody StopListRequest request){
-        return stopListService.createList(menuId,request);
+                                  @RequestBody StopListRequest request) {
+        return stopListService.createList(menuId, request);
     }
 
     @PermitAll
     @GetMapping("/byId/{listId}")
-    Optional<StopListResponse> findById(@PathVariable Long listId){
+    Optional<StopListResponse> findById(@PathVariable Long listId) {
         return stopListService.findById(listId);
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN','CHEF')")
     @PutMapping("/update/{listId}")
     SimpleResponse updateList(@PathVariable Long listId,
-                              @RequestBody StopListRequest request){
-        return stopListService.updateList(listId,request);
+                              @RequestBody StopListRequest request) {
+        return stopListService.updateList(listId, request);
     }
 
     @DeleteMapping("/delete/{listId}")
-    SimpleResponse deleteList(@PathVariable Long listId){
+    SimpleResponse deleteList(@PathVariable Long listId) {
         return stopListService.deleteList(listId);
     }
-
 
 
 }

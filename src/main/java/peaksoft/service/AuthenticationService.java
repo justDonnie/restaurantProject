@@ -1,6 +1,5 @@
 package peaksoft.service;
 
-
 import peaksoft.dto.AuthenticationResponse;
 import peaksoft.dto.SignInRequest;
 import peaksoft.dto.UserRegistrationRequest;

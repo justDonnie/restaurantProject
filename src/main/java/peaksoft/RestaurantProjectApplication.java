@@ -8,6 +8,7 @@ public class RestaurantProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestaurantProjectApplication.class, args);
+		System.err.println("Run successfully finish ☺");
 	}
 
 }

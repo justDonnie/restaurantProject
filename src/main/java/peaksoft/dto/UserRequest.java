@@ -10,18 +10,18 @@ public record UserRequest(
     public UserRequest {
     }
 
-//    public User userBuild() {                   //for save methods
-//        return User.builder()
-//                .firstName(this.user.getFirstName())
-//                .lastName(this.user.getLastName())
-//                .dateOfBirth(this.user.getDateOfBirth())
-//                .email(this.user.getEmail())
-//                .password(this.user.getPassword())
-//                .phoneNumber(this.user().getPhoneNumber())
-//                .role(this.user.getRole())
-//                .experience(this.user.getExperience())
-//                .build();
-//    }
+    public User userBuild() {                   //for save methods
+        return User.builder()
+                .firstName(this.user.getFirstName())
+                .lastName(this.user.getLastName())
+                .dateOfBirth(this.user.getDateOfBirth())
+                .email(this.user.getEmail())
+                .password(this.user.getPassword())
+                .phoneNumber(this.user().getPhoneNumber())
+                .role(this.user.getRole())
+                .experience(this.user.getExperience())
+                .build();
+    }
 
     public User userUpdate(User user) {
         user.setFirstName(this.user().getFirstName());

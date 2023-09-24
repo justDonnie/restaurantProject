@@ -29,6 +29,7 @@ public class MenuItem {
             allocationSize = 1
     )
     private Long id;
+    @Column(unique = true)
     private String name;
     private String image;
     @Positive(message = "Invalid price format !!!")

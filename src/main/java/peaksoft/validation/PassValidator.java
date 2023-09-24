@@ -10,7 +10,7 @@ public class PassValidator implements ConstraintValidator<PassValid,String> {
         if(value.length()>=4) {
             return value.length() > 4;
         }else {
-            throw new BadRequestException("Password exception !!!");
+            throw new BadRequestException("Password should contains more than 4 symbols !!!");
         }
     }
 }

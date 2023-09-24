@@ -1,18 +1,17 @@
 package peaksoft.api;
-
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import peaksoft.dto.RestaurantRequest;
-import peaksoft.dto.RestaurantResponse;
-import peaksoft.dto.SimpleResponse;
+import peaksoft.dto.*;
 import peaksoft.service.RestaurantService;
 
 import java.util.List;
 import java.util.Optional;
+
+
+
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +19,12 @@ import java.util.Optional;
 @Tag(name = "Restaurant API")
 public class RestaurantAPI {
     private final RestaurantService restaurantService;
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("/save")
+    public AuthenticationResponse saveEmployee(@RequestBody UserRequest userRequest){
+        return restaurantService.saveEmployee(userRequest);
+    }
 
     @PermitAll
     @GetMapping("/getAll")
@@ -45,6 +50,7 @@ public class RestaurantAPI {
         return restaurantService.deleteRestaurantById(restId);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/accept/{userId}")
     SimpleResponse assignEmployee(@PathVariable Long userId,
                                   @RequestParam String acceptOrReject){

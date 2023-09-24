@@ -4,9 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import peaksoft.dto.RestaurantResponse;
-import peaksoft.dto.UserResponse;
 import peaksoft.enums.CuisineType;
-import peaksoft.enums.Role;
+import peaksoft.models.Restaurant;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -15,6 +15,7 @@ public class UniqueNameValidator implements ConstraintValidator<UniqueName,Strin
 
     private final CategoryRepository categoryRepository;
 
+
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         List<Category> categories = categoryRepository.findAll().stream().filter(category -> category.getName().equalsIgnoreCase(value)).toList();

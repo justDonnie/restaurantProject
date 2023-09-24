@@ -21,7 +21,7 @@ public class UserJdbcTemplateImpl implements UserJdbcTemplate {
     private final JdbcTemplate jdbcTemplate;
 
     private UserResponse rowMapper(ResultSet rs, int rowNum) throws SQLException {
-        long id = rs.getLong("id");
+        Long id = rs.getLong("id");
         String fullName = rs.getString("fullName");
         LocalDate dateOfBirth = null;
         String dateOfBirthStr = rs.getString("dateOfBirth");

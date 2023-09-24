@@ -64,7 +64,7 @@ public class SubCategoryServiceImpl implements SubCategoryService{
         subCategoryRepository.save(subCategory);
         return new SimpleResponse(
                 HttpStatus.OK,
-                "SubCategory is successfully saved!!!"
+                "SubCategory is successfully saved !!!"
         );
     }
 

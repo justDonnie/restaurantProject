@@ -1,12 +1,12 @@
 package peaksoft.repository.template;
 
-import peaksoft.dto.CategoryRequest;
+import org.springframework.stereotype.Repository;
 import peaksoft.dto.CategoryResponse;
-import peaksoft.dto.SimpleResponse;
+
 
 import java.util.List;
 import java.util.Optional;
-
+@Repository
 public interface CategoryJdbcTemplate {
 
     List<CategoryResponse> getAllCategories();

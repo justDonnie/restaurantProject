@@ -24,4 +24,8 @@ public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
     @Query("select new peaksoft.dto.MenuItemResponse(m.id,m.name,m.image,m.price,m.description,m.isVegetarian)from MenuItem m order by false")
     List<MenuItemResponse>isFalse();
 
+    boolean existsByName(String menuItemName);
+
+    @Query("select m from MenuItem m where m.name=:menuItemName")
+    MenuItem findByName(String menuItemName);
 }

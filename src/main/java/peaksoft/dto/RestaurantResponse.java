@@ -18,13 +18,25 @@ public class RestaurantResponse {
     private int numberOfEmployees;
     private int services;
 
-    public RestaurantResponse(String name, String location, CuisineType restType,int numberOfEmployees, int services) {
+
+    public RestaurantResponse(Long id, String name, String location, CuisineType restType, int numberOfEmployees, int services) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.restType = restType;
+        this.numberOfEmployees = numberOfEmployees;
+        this.services = services;
+    }
+
+    public RestaurantResponse(String name, String location, CuisineType restType, int numberOfEmployees, int services) {
         this.name = name;
         this.location = location;
         this.restType = restType;
         this.numberOfEmployees=numberOfEmployees;
         this.services = services;
     }
+
+
 
     public RestaurantResponse() {
     }

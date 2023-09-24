@@ -1,13 +1,13 @@
 package peaksoft.service;
 
-import peaksoft.dto.RestaurantRequest;
-import peaksoft.dto.RestaurantResponse;
-import peaksoft.dto.SimpleResponse;
+import peaksoft.dto.*;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface RestaurantService {
+
+    AuthenticationResponse saveEmployee(UserRequest userRequest);
 
     Optional<RestaurantResponse> getRestaurantById(Long restaurantId);
 
